@@ -1,4 +1,5 @@
 import React from 'react'
+import { ChevronDown } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +11,7 @@ const Home = () => {
   return (
     <div  className='p-4'>
    <DropdownMenu>
-  <DropdownMenuTrigger>Teachers</DropdownMenuTrigger>
+  <DropdownMenuTrigger>Teachers  <ChevronDown /></DropdownMenuTrigger>
   <DropdownMenuContent >
     <DropdownMenuItem>Teacher 1</DropdownMenuItem>
     <DropdownMenuItem>Teacher 2</DropdownMenuItem>
