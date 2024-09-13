@@ -9,7 +9,7 @@ import {
 
 const Home = () => {
   return (
-    <div className='p-4'>
+    <div className='p-6'>
       <DropdownMenu>
         <DropdownMenuTrigger>
           <span className="flex items-center">
