@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import SubjectInput from "@/components/ui/subject-input";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import ProfessorInput from "@/components/ui/professsor-input";
 
 interface Subject {
   code: string;
@@ -133,8 +135,12 @@ const CoursePage = () => {
             ))}
           </div>
         </TabsContent>
-        <TabsContent value="add professor">Sample Prof</TabsContent>
-        <TabsContent value="add subject">Sample Subj</TabsContent>
+        <TabsContent value="add professor">
+          <ProfessorInput />
+        </TabsContent>
+        <TabsContent value="add subject">
+          <SubjectInput />
+        </TabsContent>
       </Tabs>
     </div>
   );
