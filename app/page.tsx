@@ -51,7 +51,7 @@ const CoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/handler");
+        const response = await fetch("/api/fetchData");
         const result = await response.json();
         setData(result as CourseData);
       } catch (error) {
@@ -68,6 +68,8 @@ const CoursePage = () => {
         <TabsList className="">
           <TabsTrigger value="years">Years</TabsTrigger>
           <TabsTrigger value="professors">Professors</TabsTrigger>
+          <TabsTrigger value="add professor">Add Professor</TabsTrigger>
+          <TabsTrigger value="add subject">Add Subject</TabsTrigger>
         </TabsList>
         <TabsContent value="years">
           {data.years.map((year) => (
@@ -77,7 +79,7 @@ const CoursePage = () => {
                   Year {year.year}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
                     {year.sections.map((section) => (
                       <Card key={section.section} className="mb-4  ">
                         <CardHeader>
@@ -110,7 +112,7 @@ const CoursePage = () => {
           ))}
         </TabsContent>
         <TabsContent value="professors">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {data.professors.map((professor) => (
               <Card key={professor.name}>
                 <CardHeader>
@@ -131,6 +133,8 @@ const CoursePage = () => {
             ))}
           </div>
         </TabsContent>
+        <TabsContent value="add professor">Sample Prof</TabsContent>
+        <TabsContent value="add subject">Sample Subj</TabsContent>
       </Tabs>
     </div>
   );
