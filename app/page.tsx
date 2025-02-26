@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Loader2 } from "lucide-react";
 import SubjectInput from "@/components/ui/subject-input";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,11 +38,12 @@ interface Year {
 }
 
 interface Professor {
+  _id: { $oid: string };
   name: string;
   subjects: string[];
   labs: string[];
   workingHours: number;
-  employeeCode:string;
+  employeeCode: string;
 }
 
 interface CourseData {
@@ -51,6 +53,7 @@ interface CourseData {
 
 const CoursePage = () => {
   const [data, setData] = useState<CourseData>({ years: [], professors: [] });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +63,8 @@ const CoursePage = () => {
         setData(result as CourseData);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
@@ -68,19 +73,29 @@ const CoursePage = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Course Information</h1>
-      <Tabs className="" defaultValue="years">
-        <TabsList className="">
+      <Tabs defaultValue="years">
+        <TabsList>
           <TabsTrigger value="years">Years</TabsTrigger>
           <TabsTrigger value="professors">Professors</TabsTrigger>
           <TabsTrigger value="add professor">Add Professor</TabsTrigger>
           <TabsTrigger value="add subject">Add Subject</TabsTrigger>
           <TabsTrigger value="time tables">Time Tables</TabsTrigger>
-
-        </TabsList> 
-        <Button  className="ml-2">Generate Time Tables</Button>
+        </TabsList>
+        <Button className="ml-2">Generate Time Tables</Button>
+        {loading ? (
+          <div className="flex justify-center mt-4">
+            <Loader2 size="36" className="animate-spin" />
+          </div>
+        ) : (
+          <>
         <TabsContent value="years">
           {data.years.map((year) => (
-            <Accordion type="single" collapsible key={year.year} className="">
+            <Accordion
+              type="single"
+              collapsible
+              key={year.year}
+              className=""
+            >
               <AccordionItem value={`year-${year.year}`}>
                 <AccordionTrigger className="bg-neutral-900 px-4 rounded mb-2">
                   Year {year.year}
@@ -121,16 +136,17 @@ const CoursePage = () => {
         <TabsContent value="professors">
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {data.professors.map((professor) => (
-              <Card key={professor.name}>
+              <Card key={professor._id.$oid}>
                 <CardHeader>
                   <CardTitle>{professor.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                <p>
+               <p>
                     <strong>Employee Code:</strong> {professor.employeeCode}
                   </p>
-                <p>  
-                    <strong>Subjects:</strong> {professor.subjects.join(", ")}
+                  <p>
+                    <strong>Subjects:</strong>
+                    {professor.subjects.join(", ")}
                   </p>
                   <p>
                     <strong>Labs:</strong> {professor.labs.join(", ")}
@@ -149,9 +165,9 @@ const CoursePage = () => {
         <TabsContent value="add subject">
           <SubjectInput />
         </TabsContent>
-        <TabsContent value="time tables">
-           Test
-        </TabsContent>
+        <TabsContent value="time tables">Test</TabsContent>
+      </>
+    )}
       </Tabs>
     </div>
   );
