@@ -15,6 +15,15 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [workingHours, setWorkingHours] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Updated helper functions for validation:
+  const validateGeneralInput = (value: string) => {
+    return value.replace(/[^a-zA-Z0-9 ]/g, ""); // removes only invalid characters
+  };
+
+  const validateNumberInput = (value: string) => {
+    return value.replace(/[^0-9]/g, ""); // removes only non-digit characters
+  };
+
   // New function to handle Enter key
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -42,7 +51,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
 
   const handleSubjectChange = (index: number, value: string) => {
     const newSubjects = [...subjects];
-    newSubjects[index] = value;
+    newSubjects[index] = validateGeneralInput(value);
     setSubjects(newSubjects);
   };
 
@@ -59,7 +68,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
 
   const handleLabChange = (index: number, value: string) => {
     const newLabs = [...labs];
-    newLabs[index] = value;
+    newLabs[index] = validateGeneralInput(value);
     setLabs(newLabs);
   };
 
@@ -70,6 +79,14 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
     setLabs([""]);
     setWorkingHours("");
   };
+
+  // Compute form validity: all fields must be non-empty
+  const isFormValid =
+    name.trim() !== "" &&
+    employeeCode.trim() !== "" &&
+    workingHours.trim() !== "" &&
+    subjects.every((subject) => subject.trim() !== "") &&
+    labs.every((lab) => lab.trim() !== "");
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
@@ -96,14 +113,16 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         <Input
           placeholder="Professor Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(validateGeneralInput(e.target.value))}
           onKeyDown={handleKeyDown}
           className="pbl-form-input"
         />
         <Input
           placeholder="Employee Code"
           value={employeeCode}
-          onChange={(e) => setEmployeeCode(e.target.value)}
+          onChange={(e) =>
+            setEmployeeCode(validateGeneralInput(e.target.value))
+          }
           onKeyDown={handleKeyDown}
           className="pbl-form-input"
         />
@@ -140,11 +159,15 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         <Input
           placeholder="Working Hours"
           value={workingHours}
-          onChange={(e) => setWorkingHours(e.target.value)}
+          onChange={(e) => setWorkingHours(validateNumberInput(e.target.value))}
           onKeyDown={handleKeyDown}
           className="pbl-form-input"
         />
-        <Button onClick={handleSubmit} disabled={isSubmitting}>
+        <Button
+          onClick={handleSubmit}
+          disabled={!isFormValid || isSubmitting}
+          variant={isFormValid ? undefined : "secondary"}
+        >
           {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit"}
         </Button>
       </div>
