@@ -55,8 +55,8 @@ const CoursePage = () => {
   const [data, setData] = useState<CourseData>({ years: [], professors: [] });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const loadData = async () => {
+      setLoading(true);
       try {
         const response = await fetch("/api/fetchData");
         const result = await response.json();
@@ -67,7 +67,8 @@ const CoursePage = () => {
         setLoading(false);
       }
     };
-    fetchData();
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (
@@ -160,7 +161,7 @@ const CoursePage = () => {
           </div>
         </TabsContent>
         <TabsContent value="add professor">
-          <ProfessorInput />
+          <ProfessorInput onSuccess={loadData} />
         </TabsContent>
         <TabsContent value="add subject">
           <SubjectInput />

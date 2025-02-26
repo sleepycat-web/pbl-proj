@@ -3,7 +3,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "./button";
 import { Loader2, Plus } from "lucide-react";
 
-const ProfessorInput = () => {
+interface ProfessorInputProps {
+  onSuccess?: () => void;
+}
+
+const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [name, setName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
   const [subjects, setSubjects] = useState([""]);
@@ -76,13 +80,14 @@ const ProfessorInput = () => {
       labs,
       workingHours: parseInt(workingHours, 10),
     };
-    await fetch("/api/professors", {
+    await fetch("/api/submitProfessor", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
     setIsSubmitting(false);
     resetForm();
+    if (onSuccess) onSuccess();
   };
 
   return (
