@@ -150,7 +150,7 @@ const CoursePage = () => {
           <SubjectInput />
         </TabsContent>
         <TabsContent value="time tables">
-           
+           Test
         </TabsContent>
       </Tabs>
     </div>
