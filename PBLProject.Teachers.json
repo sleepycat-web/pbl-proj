@@ -1,10 +1,11 @@
-[{
+{
   "_id": {
     "$oid": "66ec5e741963817297569934"
   },
   "professors": [
     {
       "name": "Dr. Aarav Sharma",
+      "employeeCode": "ES1001",
       "subjects": [
         "CS201",
         "CS301"
@@ -16,6 +17,7 @@
     },
     {
       "name": "Dr. Priya Patel",
+      "employeeCode": "ES1002",
       "subjects": [
         "CS202",
         "CS302"
@@ -27,6 +29,7 @@
     },
     {
       "name": "Dr. Vikram Singh",
+      "employeeCode": "ES1003",
       "subjects": [
         "CS203",
         "CS303"
@@ -38,6 +41,7 @@
     },
     {
       "name": "Dr. Neha Gupta",
+      "employeeCode": "ES1004",
       "subjects": [
         "CS204",
         "CS304"
@@ -49,6 +53,7 @@
     },
     {
       "name": "Dr. Rajesh Kumar",
+      "employeeCode": "ES1005",
       "subjects": [
         "CS401",
         "CS201"
@@ -60,6 +65,7 @@
     },
     {
       "name": "Dr. Ananya Reddy",
+      "employeeCode": "ES1006",
       "subjects": [
         "CS402",
         "CS202"
@@ -71,6 +77,7 @@
     },
     {
       "name": "Dr. Arjun Malhotra",
+      "employeeCode": "ES1007",
       "subjects": [
         "CS403",
         "CS303"
@@ -82,6 +89,7 @@
     },
     {
       "name": "Dr. Meera Desai",
+      "employeeCode": "ES1008",
       "subjects": [
         "CS404",
         "CS304"
@@ -93,6 +101,7 @@
     },
     {
       "name": "Dr. Karthik Iyer",
+      "employeeCode": "ES1009",
       "subjects": [
         "CS201",
         "CS401"
@@ -104,6 +113,7 @@
     },
     {
       "name": "Dr. Sarika Verma",
+      "employeeCode": "ES1010",
       "subjects": [
         "CS202",
         "CS402"
@@ -115,6 +125,7 @@
     },
     {
       "name": "Dr. Rahul Choudhury",
+      "employeeCode": "ES1011",
       "subjects": [
         "CS203",
         "CS403"
@@ -126,6 +137,7 @@
     },
     {
       "name": "Dr. Pooja Khanna",
+      "employeeCode": "ES1012",
       "subjects": [
         "CS204",
         "CS404"
@@ -137,6 +149,7 @@
     },
     {
       "name": "Dr. Amit Saxena",
+      "employeeCode": "ES1013",
       "subjects": [
         "CS301",
         "CS201"
@@ -148,6 +161,7 @@
     },
     {
       "name": "Dr. Divya Menon",
+      "employeeCode": "ES1014",
       "subjects": [
         "CS302",
         "CS202"
@@ -159,6 +173,7 @@
     },
     {
       "name": "Dr. Suresh Nair",
+      "employeeCode": "ES1015",
       "subjects": [
         "CS303",
         "CS203"
@@ -170,6 +185,7 @@
     },
     {
       "name": "Dr. Kavita Rao",
+      "employeeCode": "ES1016",
       "subjects": [
         "CS304",
         "CS204"
@@ -180,4 +196,4 @@
       "workingHours": 20
     }
   ]
-}]
+}
