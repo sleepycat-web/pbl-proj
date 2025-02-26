@@ -10,15 +10,15 @@ export default async function handler(
       const { db } = await connectToDatabase();
 
       // Fetch years/subjects data
-      const yearsData = await db.collection("Subjects").findOne({});
+      const yearsData = await db.collection("Subjects").find({}).toArray();
 
       // Fetch professors data
-      const professorsData = await db.collection("Teachers").findOne({});
+      const professorsData = await db.collection("Teachers").find({}).toArray();
 
       // Combine the data
       const data = {
-        years: yearsData?.years || [],
-        professors: professorsData?.professors || [],
+        years: yearsData  || [],
+        professors: professorsData || [],
       };
 
       res.status(200).json(data);
