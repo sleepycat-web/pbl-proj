@@ -15,15 +15,15 @@ export default async function handler(
     const { db } = await connectToDatabase();
 
     // Fetch years/subjects data
-    const yearsData = await db.collection("Subjects").findOne({});
-    
+    const yearsData = await db.collection("Subjects").find({}).toArray();
+
     // Fetch professors data
-    const professorsData = await db.collection("Teachers").findOne({});
-    
+    const professorsData = await db.collection("Teachers").find({}).toArray();
+
     // Combine the data
     const data = {
-      years: yearsData?.years || [],
-      professors: professorsData?.professors || [],
+      years: yearsData || [],
+      professors: professorsData || [],
     };
     console.log(data);
     // Space for additional operations with data
@@ -31,11 +31,11 @@ export default async function handler(
     // Add your additional data operations here
     // Example: Filter data, transform data, etc.
     // -------------------------------------------
-    
+
     // Return success status instead of data
-    return res.status(200).json({ 
-      status: 'success',
-      message: 'Data retrieved successfully'
+    return res.status(200).json({
+      status: "success",
+      message: "Data retrieved successfully",
     });
   } catch (error) {
     console.error('Error fetching data:', error);
