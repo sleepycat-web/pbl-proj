@@ -42,7 +42,7 @@ import { Button } from './button';
   </SelectTrigger>
   <SelectContent>
     <SelectItem value="Subjects">Theory</SelectItem>
-    <SelectItem value="Labs">Labs</SelectItem>
+    <SelectItem value="Labs">Lab</SelectItem>
   </SelectContent>
 </Select>
       <Input placeholder='Enter the Hours'/>
