@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SubjectInput from "@/components/ui/subject-input";
+import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -40,6 +41,7 @@ interface Professor {
   subjects: string[];
   labs: string[];
   workingHours: number;
+  employeeCode:string;
 }
 
 interface CourseData {
@@ -72,7 +74,10 @@ const CoursePage = () => {
           <TabsTrigger value="professors">Professors</TabsTrigger>
           <TabsTrigger value="add professor">Add Professor</TabsTrigger>
           <TabsTrigger value="add subject">Add Subject</TabsTrigger>
-        </TabsList>
+          <TabsTrigger value="time tables">Time Tables</TabsTrigger>
+
+        </TabsList> 
+        <Button  className="ml-2">Generate Time Tables</Button>
         <TabsContent value="years">
           {data.years.map((year) => (
             <Accordion type="single" collapsible key={year.year} className="">
@@ -121,7 +126,10 @@ const CoursePage = () => {
                   <CardTitle>{professor.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>
+                <p>
+                    <strong>Employee Code:</strong> {professor.employeeCode}
+                  </p>
+                <p>  
                     <strong>Subjects:</strong> {professor.subjects.join(", ")}
                   </p>
                   <p>
@@ -140,6 +148,9 @@ const CoursePage = () => {
         </TabsContent>
         <TabsContent value="add subject">
           <SubjectInput />
+        </TabsContent>
+        <TabsContent value="time tables">
+           
         </TabsContent>
       </Tabs>
     </div>

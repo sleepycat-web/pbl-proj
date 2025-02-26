@@ -7,9 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
- 
-const SubjectInput = () => {
+import { Button } from './button';
+ const SubjectInput = () => {
   return (
     <div>
  <div className='space-y-2 max-w-sm'>
@@ -55,6 +54,7 @@ const SubjectInput = () => {
       <Input placeholder='Subject Type'/>
       
       <Input placeholder=' Labs'/>
+      <Button>Submit</Button>
  </div>
     </div>
   );
