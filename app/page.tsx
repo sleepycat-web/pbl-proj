@@ -54,6 +54,7 @@ interface CourseData {
 const CoursePage = () => {
   const [data, setData] = useState<CourseData>({ years: [], professors: [] });
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("years"); // new state
 
   const loadData = async () => {
       setLoading(true);
@@ -74,7 +75,7 @@ const CoursePage = () => {
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Course Information</h1>
-      <Tabs defaultValue="years">
+      <Tabs value={activeTab} onValueChange={setActiveTab}> {/* modified Tabs */}
         <TabsList>
           <TabsTrigger value="years">Years</TabsTrigger>
           <TabsTrigger value="professors">Professors</TabsTrigger>
@@ -161,7 +162,10 @@ const CoursePage = () => {
           </div>
         </TabsContent>
         <TabsContent value="add professor">
-          <ProfessorInput onSuccess={loadData} />
+          <ProfessorInput onSuccess={async () => {
+            await loadData();
+            setActiveTab("professors");
+          }} />
         </TabsContent>
         <TabsContent value="add subject">
           <SubjectInput />
