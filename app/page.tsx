@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loader2 } from "lucide-react";
-import SubjectInput from "@/components/ui/subject-input";
+import SubjectInput from "@/components/subject-input";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -11,7 +11,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import ProfessorInput from "@/components/ui/professsor-input";
+import ProfessorInput from "@/components/professsor-input";
+import TimeTables from "@/components/time-tables";
 
 interface Subject {
   code: string;
@@ -73,6 +74,20 @@ const CoursePage = () => {
     loadData();
   }, []);
 
+  // Add generateTimeTables function
+  const generateTimeTables = async () => {
+    try {
+      const response = await fetch("/api/generateTimeTables");
+      if (response.ok) {
+        setActiveTab("time tables");
+      } else {
+        console.error("Failed to generate time tables");
+      }
+    } catch (error) {
+      console.error("Error generating time tables:", error);
+    }
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Course Information</h1>
@@ -86,7 +101,9 @@ const CoursePage = () => {
           <TabsTrigger value="add subject">Add Subject</TabsTrigger>
           <TabsTrigger value="time tables">Time Tables</TabsTrigger>
         </TabsList>
-        <Button className="ml-2">Generate Time Tables</Button>
+        <Button className="ml-2" onClick={generateTimeTables}>
+          Generate Time Tables
+        </Button>
         {loading ? (
           <div className="flex justify-center mt-4">
             <Loader2 size="36" className="animate-spin" />
@@ -182,7 +199,7 @@ const CoursePage = () => {
             <TabsContent value="add subject">
               <SubjectInput />
             </TabsContent>
-            <TabsContent value="time tables">Test</TabsContent>
+            <TabsContent value="time tables"><TimeTables/></TabsContent>
           </>
         )}
       </Tabs>
