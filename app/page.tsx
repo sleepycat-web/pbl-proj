@@ -130,12 +130,13 @@ const CoursePage = () => {
                             <CardHeader>
                               <CardTitle>
                                 Section {section.section}
-                                <span className="ml-2 text-sm font-medium text-gray-500">
-                                  Room: {section.room}
+                                <span className="ml-2 text-sm font-medium text-neutral-500">
+                                  ({section.room})
                                 </span>
                               </CardTitle>
                             </CardHeader>
                             <CardContent>
+                              
                               <h4 className="font-semibold mb-2">Subjects:</h4>
                               <ul>
                                 {section.subjects.map((subject) => (
