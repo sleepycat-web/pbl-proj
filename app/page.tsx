@@ -42,7 +42,7 @@ interface Year {
 interface Professor {
   _id: { $oid: string };
   name: string;
-  subjects: { code: string; name: string }[];
+  subjects?: { code: string; name: string }[];
   labs?: { code: string; name: string }[]; // labs now as objects
   workingHours: number;
   employeeCode: string;
@@ -166,12 +166,16 @@ const CoursePage = () => {
                       <p>
                         <strong>Employee Code:</strong> {professor.employeeCode}
                       </p>
-                      <p>
-                        <strong>Subjects:</strong>{" "}
-                        {professor.subjects
-                          .map((subject) => `${subject.name} (${subject.code})`)
-                          .join(", ")}
-                      </p>
+                      {professor.subjects && professor.subjects.length > 0 && (
+                        <p>
+                          <strong>Subjects:</strong>{" "}
+                          {professor.subjects
+                            .map((subject) => `${subject.name} (${subject.code})`)
+                            .join(", ")}
+                        </p>
+                      )}
+                       
+                        
                       {professor.labs && professor.labs.length > 0 && (
                         <p>
                           <strong>Labs:</strong>{" "}
@@ -199,7 +203,9 @@ const CoursePage = () => {
             <TabsContent value="add subject">
               <SubjectInput />
             </TabsContent>
-            <TabsContent value="time tables"><TimeTables/></TabsContent>
+            <TabsContent value="time tables">
+              <TimeTables />
+            </TabsContent>
           </>
         )}
       </Tabs>

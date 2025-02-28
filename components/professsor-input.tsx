@@ -115,25 +115,28 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   };
 
   // Validate if both code and name are either both filled or both empty
-  const isLabValid = (lab: LabField) => {
+  const isFieldValid = (field: SubjectField | LabField) => {
     return (
-      (lab.code === "" && lab.name === "") ||
-      (lab.code !== "" && lab.name !== "")
+      (field.code === "" && field.name === "") ||
+      (field.code !== "" && field.name !== "")
     );
   };
 
-  // Compute form validity: required fields must be non-empty (labs can be empty)
+  // Compute form validity: required fields must be non-empty (subjects and labs can be empty)
   const isFormValid =
     name.trim() !== "" &&
     employeeCode.trim() !== "" &&
     workingHours.trim() !== "" &&
-    subjects.every(
-      (subject) => subject.code.trim() !== "" && subject.name.trim() !== ""
-    ) &&
-    labs.every(isLabValid);
+    subjects.every(isFieldValid) &&
+    labs.every(isFieldValid);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+
+    // Filter out empty subjects (both code and name must be empty)
+    const filteredSubjects = subjects.filter(
+      (subject) => subject.code.trim() !== "" && subject.name.trim() !== ""
+    );
 
     // Filter out empty labs (both code and name must be empty)
     const filteredLabs = labs.filter(
@@ -143,10 +146,13 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
     const payload = {
       name,
       employeeCode,
-      subjects: subjects.map((subject) => ({
-        code: subject.code,
-        name: subject.name,
-      })),
+      // Only include subjects if there are non-empty entries
+      ...(filteredSubjects.length > 0 && {
+        subjects: filteredSubjects.map((subject) => ({
+          code: subject.code,
+          name: subject.name,
+        })),
+      }),
       // Only include labs if there are non-empty entries
       ...(filteredLabs.length > 0 && {
         labs: filteredLabs.map((lab) => ({
