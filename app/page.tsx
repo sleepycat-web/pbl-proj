@@ -29,6 +29,7 @@ interface Lab {
 
 interface Section {
   section: string;
+  room: string; // Added room property
   subjects: Subject[];
   labs: Lab[];
 }
@@ -42,7 +43,7 @@ interface Year {
 interface Professor {
   _id: { $oid: string };
   name: string;
-  subjects: { code: string; name: string }[];
+  subjects?: { code: string; name: string }[];
   labs?: { code: string; name: string }[]; // labs now as objects
   workingHours: number;
   employeeCode: string;
@@ -127,9 +128,15 @@ const CoursePage = () => {
                         {year.sections.map((section) => (
                           <Card key={section.section} className="mb-4  ">
                             <CardHeader>
-                              <CardTitle>Section {section.section}</CardTitle>
+                              <CardTitle>
+                                Section {section.section}
+                                <span className="ml-2 text-sm font-medium text-neutral-500">
+                                  ({section.room})
+                                </span>
+                              </CardTitle>
                             </CardHeader>
                             <CardContent>
+                              
                               <h4 className="font-semibold mb-2">Subjects:</h4>
                               <ul>
                                 {section.subjects.map((subject) => (
@@ -166,12 +173,16 @@ const CoursePage = () => {
                       <p>
                         <strong>Employee Code:</strong> {professor.employeeCode}
                       </p>
-                      <p>
-                        <strong>Subjects:</strong>{" "}
-                        {professor.subjects
-                          .map((subject) => `${subject.name} (${subject.code})`)
-                          .join(", ")}
-                      </p>
+                      {professor.subjects && professor.subjects.length > 0 && (
+                        <p>
+                          <strong>Subjects:</strong>{" "}
+                          {professor.subjects
+                            .map((subject) => `${subject.name} (${subject.code})`)
+                            .join(", ")}
+                        </p>
+                      )}
+                       
+                        
                       {professor.labs && professor.labs.length > 0 && (
                         <p>
                           <strong>Labs:</strong>{" "}
@@ -199,7 +210,9 @@ const CoursePage = () => {
             <TabsContent value="add subject">
               <SubjectInput />
             </TabsContent>
-            <TabsContent value="time tables"><TimeTables/></TabsContent>
+            <TabsContent value="time tables">
+              <TimeTables />
+            </TabsContent>
           </>
         )}
       </Tabs>

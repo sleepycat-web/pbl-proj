@@ -1,609 +1,626 @@
-[{
-  "_id": {
-    "$oid": "67bf07640d63cf2ff0218030"
+[
+  {
+    "_id": {
+      "$oid": "67bf07640d63cf2ff0218030"
+    },
+    "year": 2,
+    "sections": [
+      {
+        "section": "A",
+        "room": "E101",
+        "subjects": [
+          {
+            "code": "CS201",
+            "name": "Data Structures and Algorithms",
+            "credits": 4
+          },
+          {
+            "code": "CS202",
+            "name": "Object-Oriented Programming",
+            "credits": 4
+          },
+          {
+            "code": "CS203",
+            "name": "Computer Organization",
+            "credits": 4
+          },
+          {
+            "code": "CS204",
+            "name": "Discrete Mathematics",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL201",
+            "name": "Data Structures Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL202",
+            "name": "OOP Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "B",
+        "room": "E102",
+        "subjects": [
+          {
+            "code": "CS201",
+            "name": "Data Structures and Algorithms",
+            "credits": 4
+          },
+          {
+            "code": "CS202",
+            "name": "Object-Oriented Programming",
+            "credits": 4
+          },
+          {
+            "code": "CS203",
+            "name": "Computer Organization",
+            "credits": 4
+          },
+          {
+            "code": "CS204",
+            "name": "Discrete Mathematics",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL201",
+            "name": "Data Structures Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL202",
+            "name": "OOP Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "C",
+        "room": "E103",
+        "subjects": [
+          {
+            "code": "CS201",
+            "name": "Data Structures and Algorithms",
+            "credits": 4
+          },
+          {
+            "code": "CS202",
+            "name": "Object-Oriented Programming",
+            "credits": 4
+          },
+          {
+            "code": "CS203",
+            "name": "Computer Organization",
+            "credits": 4
+          },
+          {
+            "code": "CS204",
+            "name": "Discrete Mathematics",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL201",
+            "name": "Data Structures Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL202",
+            "name": "OOP Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "AIML",
+        "room": "E104",
+        "subjects": [
+          {
+            "code": "CS201",
+            "name": "Data Structures and Algorithms",
+            "credits": 4
+          },
+          {
+            "code": "CS202",
+            "name": "Object-Oriented Programming",
+            "credits": 4
+          },
+          {
+            "code": "CS203",
+            "name": "Computer Organization",
+            "credits": 4
+          },
+          {
+            "code": "CS204",
+            "name": "Discrete Mathematics",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL201",
+            "name": "Data Structures Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL202",
+            "name": "OOP Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "IOT",
+        "room": "E105",
+        "subjects": [
+          {
+            "code": "CS201",
+            "name": "Data Structures and Algorithms",
+            "credits": 4
+          },
+          {
+            "code": "CS202",
+            "name": "Object-Oriented Programming",
+            "credits": 4
+          },
+          {
+            "code": "CS203",
+            "name": "Computer Organization",
+            "credits": 4
+          },
+          {
+            "code": "CS204",
+            "name": "Discrete Mathematics",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL201",
+            "name": "Data Structures Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL202",
+            "name": "OOP Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      }
+    ]
   },
-  "year": 2,
-  "sections": [
-    {
-      "section": "A",
-      "subjects": [
-        {
-          "code": "CS201",
-          "name": "Data Structures and Algorithms",
-          "credits": 4
-        },
-        {
-          "code": "CS202",
-          "name": "Object-Oriented Programming",
-          "credits": 4
-        },
-        {
-          "code": "CS203",
-          "name": "Computer Organization",
-          "credits": 4
-        },
-        {
-          "code": "CS204",
-          "name": "Discrete Mathematics",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL201",
-          "name": "Data Structures Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL202",
-          "name": "OOP Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
+  {
+    "_id": {
+      "$oid": "67bf07640d63cf2ff0218031"
     },
-    {
-      "section": "B",
-      "subjects": [
-        {
-          "code": "CS201",
-          "name": "Data Structures and Algorithms",
-          "credits": 4
-        },
-        {
-          "code": "CS202",
-          "name": "Object-Oriented Programming",
-          "credits": 4
-        },
-        {
-          "code": "CS203",
-          "name": "Computer Organization",
-          "credits": 4
-        },
-        {
-          "code": "CS204",
-          "name": "Discrete Mathematics",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL201",
-          "name": "Data Structures Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL202",
-          "name": "OOP Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "C",
-      "subjects": [
-        {
-          "code": "CS201",
-          "name": "Data Structures and Algorithms",
-          "credits": 4
-        },
-        {
-          "code": "CS202",
-          "name": "Object-Oriented Programming",
-          "credits": 4
-        },
-        {
-          "code": "CS203",
-          "name": "Computer Organization",
-          "credits": 4
-        },
-        {
-          "code": "CS204",
-          "name": "Discrete Mathematics",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL201",
-          "name": "Data Structures Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL202",
-          "name": "OOP Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "AIML",
-      "subjects": [
-        {
-          "code": "CS201",
-          "name": "Data Structures and Algorithms",
-          "credits": 4
-        },
-        {
-          "code": "CS202",
-          "name": "Object-Oriented Programming",
-          "credits": 4
-        },
-        {
-          "code": "CS203",
-          "name": "Computer Organization",
-          "credits": 4
-        },
-        {
-          "code": "CS204",
-          "name": "Discrete Mathematics",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL201",
-          "name": "Data Structures Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL202",
-          "name": "OOP Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "IOT",
-      "subjects": [
-        {
-          "code": "CS201",
-          "name": "Data Structures and Algorithms",
-          "credits": 4
-        },
-        {
-          "code": "CS202",
-          "name": "Object-Oriented Programming",
-          "credits": 4
-        },
-        {
-          "code": "CS203",
-          "name": "Computer Organization",
-          "credits": 4
-        },
-        {
-          "code": "CS204",
-          "name": "Discrete Mathematics",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL201",
-          "name": "Data Structures Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL202",
-          "name": "OOP Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    }
-  ]
-},
-{
-  "_id": {
-    "$oid": "67bf07640d63cf2ff0218031"
+    "year": 3,
+    "sections": [
+      {
+        "section": "A",
+        "room": "E201",
+        "subjects": [
+          {
+            "code": "CS301",
+            "name": "Database Management Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS302",
+            "name": "Operating Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS303",
+            "name": "Computer Networks",
+            "credits": 4
+          },
+          {
+            "code": "CS304",
+            "name": "Software Engineering",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL301",
+            "name": "DBMS Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL302",
+            "name": "OS Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "B",
+        "room": "E202",
+        "subjects": [
+          {
+            "code": "CS301",
+            "name": "Database Management Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS302",
+            "name": "Operating Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS303",
+            "name": "Computer Networks",
+            "credits": 4
+          },
+          {
+            "code": "CS304",
+            "name": "Software Engineering",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL301",
+            "name": "DBMS Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL302",
+            "name": "OS Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "C",
+        "room": "E203",
+        "subjects": [
+          {
+            "code": "CS301",
+            "name": "Database Management Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS302",
+            "name": "Operating Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS303",
+            "name": "Computer Networks",
+            "credits": 4
+          },
+          {
+            "code": "CS304",
+            "name": "Software Engineering",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL301",
+            "name": "DBMS Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL302",
+            "name": "OS Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "AIML",
+        "room": "E204",
+        "subjects": [
+          {
+            "code": "CS301",
+            "name": "Database Management Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS302",
+            "name": "Operating Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS303",
+            "name": "Computer Networks",
+            "credits": 4
+          },
+          {
+            "code": "CS304",
+            "name": "Software Engineering",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL301",
+            "name": "DBMS Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL302",
+            "name": "OS Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "IOT",
+        "room": "E205",
+        "subjects": [
+          {
+            "code": "CS301",
+            "name": "Database Management Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS302",
+            "name": "Operating Systems",
+            "credits": 4
+          },
+          {
+            "code": "CS303",
+            "name": "Computer Networks",
+            "credits": 4
+          },
+          {
+            "code": "CS304",
+            "name": "Software Engineering",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL301",
+            "name": "DBMS Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL302",
+            "name": "OS Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      }
+    ]
   },
-  "year": 3,
-  "sections": [
-    {
-      "section": "A",
-      "subjects": [
-        {
-          "code": "CS301",
-          "name": "Database Management Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS302",
-          "name": "Operating Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS303",
-          "name": "Computer Networks",
-          "credits": 4
-        },
-        {
-          "code": "CS304",
-          "name": "Software Engineering",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL301",
-          "name": "DBMS Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL302",
-          "name": "OS Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
+  {
+    "_id": {
+      "$oid": "67bf07640d63cf2ff0218032"
     },
-    {
-      "section": "B",
-      "subjects": [
-        {
-          "code": "CS301",
-          "name": "Database Management Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS302",
-          "name": "Operating Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS303",
-          "name": "Computer Networks",
-          "credits": 4
-        },
-        {
-          "code": "CS304",
-          "name": "Software Engineering",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL301",
-          "name": "DBMS Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL302",
-          "name": "OS Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "C",
-      "subjects": [
-        {
-          "code": "CS301",
-          "name": "Database Management Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS302",
-          "name": "Operating Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS303",
-          "name": "Computer Networks",
-          "credits": 4
-        },
-        {
-          "code": "CS304",
-          "name": "Software Engineering",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL301",
-          "name": "DBMS Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL302",
-          "name": "OS Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "AIML",
-      "subjects": [
-        {
-          "code": "CS301",
-          "name": "Database Management Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS302",
-          "name": "Operating Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS303",
-          "name": "Computer Networks",
-          "credits": 4
-        },
-        {
-          "code": "CS304",
-          "name": "Software Engineering",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL301",
-          "name": "DBMS Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL302",
-          "name": "OS Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "IOT",
-      "subjects": [
-        {
-          "code": "CS301",
-          "name": "Database Management Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS302",
-          "name": "Operating Systems",
-          "credits": 4
-        },
-        {
-          "code": "CS303",
-          "name": "Computer Networks",
-          "credits": 4
-        },
-        {
-          "code": "CS304",
-          "name": "Software Engineering",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL301",
-          "name": "DBMS Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL302",
-          "name": "OS Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    }
-  ]
-},
-{
-  "_id": {
-    "$oid": "67bf07640d63cf2ff0218032"
-  },
-  "year": 4,
-  "sections": [
-    {
-      "section": "A",
-      "subjects": [
-        {
-          "code": "CS401",
-          "name": "Artificial Intelligence",
-          "credits": 4
-        },
-        {
-          "code": "CS402",
-          "name": "Web Technologies",
-          "credits": 4
-        },
-        {
-          "code": "CS403",
-          "name": "Cryptography and Network Security",
-          "credits": 4
-        },
-        {
-          "code": "CS404",
-          "name": "Cloud Computing",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL401",
-          "name": "AI Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL402",
-          "name": "Web Tech Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "B",
-      "subjects": [
-        {
-          "code": "CS401",
-          "name": "Artificial Intelligence",
-          "credits": 4
-        },
-        {
-          "code": "CS402",
-          "name": "Web Technologies",
-          "credits": 4
-        },
-        {
-          "code": "CS403",
-          "name": "Cryptography and Network Security",
-          "credits": 4
-        },
-        {
-          "code": "CS404",
-          "name": "Cloud Computing",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL401",
-          "name": "AI Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL402",
-          "name": "Web Tech Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "C",
-      "subjects": [
-        {
-          "code": "CS401",
-          "name": "Artificial Intelligence",
-          "credits": 4
-        },
-        {
-          "code": "CS402",
-          "name": "Web Technologies",
-          "credits": 4
-        },
-        {
-          "code": "CS403",
-          "name": "Cryptography and Network Security",
-          "credits": 4
-        },
-        {
-          "code": "CS404",
-          "name": "Cloud Computing",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL401",
-          "name": "AI Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL402",
-          "name": "Web Tech Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "AIML",
-      "subjects": [
-        {
-          "code": "CS401",
-          "name": "Artificial Intelligence",
-          "credits": 4
-        },
-        {
-          "code": "CS402",
-          "name": "Web Technologies",
-          "credits": 4
-        },
-        {
-          "code": "CS403",
-          "name": "Cryptography and Network Security",
-          "credits": 4
-        },
-        {
-          "code": "CS404",
-          "name": "Cloud Computing",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL401",
-          "name": "AI Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL402",
-          "name": "Web Tech Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    },
-    {
-      "section": "IOT",
-      "subjects": [
-        {
-          "code": "CS401",
-          "name": "Artificial Intelligence",
-          "credits": 4
-        },
-        {
-          "code": "CS402",
-          "name": "Web Technologies",
-          "credits": 4
-        },
-        {
-          "code": "CS403",
-          "name": "Cryptography and Network Security",
-          "credits": 4
-        },
-        {
-          "code": "CS404",
-          "name": "Cloud Computing",
-          "credits": 4
-        }
-      ],
-      "labs": [
-        {
-          "code": "CSL401",
-          "name": "AI Lab",
-          "credits": 1,
-          "hours": 2
-        },
-        {
-          "code": "CSL402",
-          "name": "Web Tech Lab",
-          "credits": 1,
-          "hours": 2
-        }
-      ]
-    }
-  ]
-}]
+    "year": 4,
+    "sections": [
+      {
+        "section": "A",
+        "room": "E301",
+        "subjects": [
+          {
+            "code": "CS401",
+            "name": "Artificial Intelligence",
+            "credits": 4
+          },
+          {
+            "code": "CS402",
+            "name": "Web Technologies",
+            "credits": 4
+          },
+          {
+            "code": "CS403",
+            "name": "Cryptography and Network Security",
+            "credits": 4
+          },
+          {
+            "code": "CS404",
+            "name": "Cloud Computing",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL401",
+            "name": "AI Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL402",
+            "name": "Web Tech Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "B",
+        "room": "E302",
+        "subjects": [
+          {
+            "code": "CS401",
+            "name": "Artificial Intelligence",
+            "credits": 4
+          },
+          {
+            "code": "CS402",
+            "name": "Web Technologies",
+            "credits": 4
+          },
+          {
+            "code": "CS403",
+            "name": "Cryptography and Network Security",
+            "credits": 4
+          },
+          {
+            "code": "CS404",
+            "name": "Cloud Computing",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL401",
+            "name": "AI Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL402",
+            "name": "Web Tech Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "C",
+        "room": "E303",
+        "subjects": [
+          {
+            "code": "CS401",
+            "name": "Artificial Intelligence",
+            "credits": 4
+          },
+          {
+            "code": "CS402",
+            "name": "Web Technologies",
+            "credits": 4
+          },
+          {
+            "code": "CS403",
+            "name": "Cryptography and Network Security",
+            "credits": 4
+          },
+          {
+            "code": "CS404",
+            "name": "Cloud Computing",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL401",
+            "name": "AI Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL402",
+            "name": "Web Tech Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "AIML",
+        "room": "E304",
+        "subjects": [
+          {
+            "code": "CS401",
+            "name": "Artificial Intelligence",
+            "credits": 4
+          },
+          {
+            "code": "CS402",
+            "name": "Web Technologies",
+            "credits": 4
+          },
+          {
+            "code": "CS403",
+            "name": "Cryptography and Network Security",
+            "credits": 4
+          },
+          {
+            "code": "CS404",
+            "name": "Cloud Computing",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL401",
+            "name": "AI Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL402",
+            "name": "Web Tech Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      },
+      {
+        "section": "IOT",
+        "room": "E305",
+        "subjects": [
+          {
+            "code": "CS401",
+            "name": "Artificial Intelligence",
+            "credits": 4
+          },
+          {
+            "code": "CS402",
+            "name": "Web Technologies",
+            "credits": 4
+          },
+          {
+            "code": "CS403",
+            "name": "Cryptography and Network Security",
+            "credits": 4
+          },
+          {
+            "code": "CS404",
+            "name": "Cloud Computing",
+            "credits": 4
+          }
+        ],
+        "labs": [
+          {
+            "code": "CSL401",
+            "name": "AI Lab",
+            "credits": 1,
+            "hours": 2
+          },
+          {
+            "code": "CSL402",
+            "name": "Web Tech Lab",
+            "credits": 1,
+            "hours": 2
+          }
+        ]
+      }
+    ]
+  }
+]
