@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Button } from "./button";
+import { Button } from "./ui/button";
 import { Loader2, Plus, X } from "lucide-react";
 
 interface ProfessorInputProps {
@@ -205,7 +205,10 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
             />
             <div className="flex items-center">
               {index == 0 && (
-                <Plus className="ml-2 cursor-pointer" onClick={addSubjectField} />
+                <Plus
+                  className="ml-2 cursor-pointer"
+                  onClick={addSubjectField}
+                />
               )}
               {index !== 0 && (
                 <X
