@@ -29,6 +29,7 @@ interface Lab {
 
 interface Section {
   section: string;
+  room: string; // Added room property
   subjects: Subject[];
   labs: Lab[];
 }
@@ -127,7 +128,12 @@ const CoursePage = () => {
                         {year.sections.map((section) => (
                           <Card key={section.section} className="mb-4  ">
                             <CardHeader>
-                              <CardTitle>Section {section.section}</CardTitle>
+                              <CardTitle>
+                                Section {section.section}
+                                <span className="ml-2 text-sm font-medium text-gray-500">
+                                  Room: {section.room}
+                                </span>
+                              </CardTitle>
                             </CardHeader>
                             <CardContent>
                               <h4 className="font-semibold mb-2">Subjects:</h4>
