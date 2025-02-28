@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "./button";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, X } from "lucide-react";
 
 interface ProfessorInputProps {
   onSuccess?: () => void;
 }
 
+interface SubjectField {
+  code: string;
+  name: string;
+}
+
+interface LabField {
+  code: string;
+  name: string;
+}
+
 const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [name, setName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
-  const [subjects, setSubjects] = useState([""]);
-  const [labs, setLabs] = useState([""]);
+  const [subjects, setSubjects] = useState<SubjectField[]>([
+    { code: "", name: "" },
+  ]);
+  const [labs, setLabs] = useState<LabField[]>([{ code: "", name: "" }]);
   const [workingHours, setWorkingHours] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -37,11 +49,11 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   };
 
   const addSubjectField = () => {
-    setSubjects([...subjects, ""]);
+    setSubjects([...subjects, { code: "", name: "" }]);
     // Focus the new subject input after state updates
     setTimeout(() => {
       const subjectInputs = document.querySelectorAll(
-        'input[data-group="subject"]'
+        'input[data-group="subject-code"]'
       );
       if (subjectInputs.length) {
         (subjectInputs[subjectInputs.length - 1] as HTMLInputElement).focus();
@@ -49,52 +61,99 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
     }, 0);
   };
 
-  const handleSubjectChange = (index: number, value: string) => {
+  const removeSubjectField = (indexToRemove: number) => {
+    setSubjects(subjects.filter((_, index) => index !== indexToRemove));
+  };
+
+  const handleSubjectCodeChange = (index: number, value: string) => {
     const newSubjects = [...subjects];
-    newSubjects[index] = validateGeneralInput(value);
+    newSubjects[index].code = validateGeneralInput(value);
+    setSubjects(newSubjects);
+  };
+
+  const handleSubjectNameChange = (index: number, value: string) => {
+    const newSubjects = [...subjects];
+    newSubjects[index].name = validateGeneralInput(value);
     setSubjects(newSubjects);
   };
 
   const addLabField = () => {
-    setLabs([...labs, ""]);
+    setLabs([...labs, { code: "", name: "" }]);
     // Focus the new lab input after state updates
     setTimeout(() => {
-      const labInputs = document.querySelectorAll('input[data-group="lab"]');
+      const labInputs = document.querySelectorAll(
+        'input[data-group="lab-code"]'
+      );
       if (labInputs.length) {
         (labInputs[labInputs.length - 1] as HTMLInputElement).focus();
       }
     }, 0);
   };
 
-  const handleLabChange = (index: number, value: string) => {
+  const removeLabField = (indexToRemove: number) => {
+    setLabs(labs.filter((_, index) => index !== indexToRemove));
+  };
+
+  const handleLabCodeChange = (index: number, value: string) => {
     const newLabs = [...labs];
-    newLabs[index] = validateGeneralInput(value);
+    newLabs[index].code = validateGeneralInput(value);
+    setLabs(newLabs);
+  };
+
+  const handleLabNameChange = (index: number, value: string) => {
+    const newLabs = [...labs];
+    newLabs[index].name = validateGeneralInput(value);
     setLabs(newLabs);
   };
 
   const resetForm = () => {
     setName("");
     setEmployeeCode("");
-    setSubjects([""]);
-    setLabs([""]);
+    setSubjects([{ code: "", name: "" }]);
+    setLabs([{ code: "", name: "" }]);
     setWorkingHours("");
   };
 
-  // Compute form validity: all fields must be non-empty
+  // Validate if both code and name are either both filled or both empty
+  const isLabValid = (lab: LabField) => {
+    return (
+      (lab.code === "" && lab.name === "") ||
+      (lab.code !== "" && lab.name !== "")
+    );
+  };
+
+  // Compute form validity: required fields must be non-empty (labs can be empty)
   const isFormValid =
     name.trim() !== "" &&
     employeeCode.trim() !== "" &&
     workingHours.trim() !== "" &&
-    subjects.every((subject) => subject.trim() !== "") &&
-    labs.every((lab) => lab.trim() !== "");
+    subjects.every(
+      (subject) => subject.code.trim() !== "" && subject.name.trim() !== ""
+    ) &&
+    labs.every(isLabValid);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+
+    // Filter out empty labs (both code and name must be empty)
+    const filteredLabs = labs.filter(
+      (lab) => lab.code.trim() !== "" && lab.name.trim() !== ""
+    );
+
     const payload = {
       name,
       employeeCode,
-      subjects,
-      labs,
+      subjects: subjects.map((subject) => ({
+        code: subject.code,
+        name: subject.name,
+      })),
+      // Only include labs if there are non-empty entries
+      ...(filteredLabs.length > 0 && {
+        labs: filteredLabs.map((lab) => ({
+          code: lab.code,
+          name: lab.name,
+        })),
+      }),
       workingHours: parseInt(workingHours, 10),
     };
     await fetch("/api/submitProfessor", {
@@ -127,33 +186,65 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
           className="pbl-form-input"
         />
         {subjects.map((subject, index) => (
-          <div key={index} className="flex items-center">
+          <div key={index} className="flex items-center gap-2">
             <Input
-              placeholder="Subject"
-              value={subject}
-              onChange={(e) => handleSubjectChange(index, e.target.value)}
+              placeholder="Subject Code"
+              value={subject.code}
+              onChange={(e) => handleSubjectCodeChange(index, e.target.value)}
               onKeyDown={handleKeyDown}
               className="pbl-form-input"
-              data-group="subject"
+              data-group="subject-code"
             />
-            {index === subjects.length - 1 && (
-              <Plus className="ml-2 cursor-pointer" onClick={addSubjectField} />
-            )}
+            <Input
+              placeholder="Subject Name"
+              value={subject.name}
+              onChange={(e) => handleSubjectNameChange(index, e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="pbl-form-input"
+              data-group="subject-name"
+            />
+            <div className="flex items-center">
+              {index == 0 && (
+                <Plus className="ml-2 cursor-pointer" onClick={addSubjectField} />
+              )}
+              {index !== 0 && (
+                <X
+                  className="ml-2 cursor-pointer text-red-500 hover:text-red-700"
+                  onClick={() => removeSubjectField(index)}
+                />
+              )}
+            </div>
           </div>
         ))}
         {labs.map((lab, index) => (
-          <div key={index} className="flex items-center">
+          <div key={index} className="flex items-center gap-2">
             <Input
-              placeholder="Lab"
-              value={lab}
-              onChange={(e) => handleLabChange(index, e.target.value)}
+              placeholder="Lab Code"
+              value={lab.code}
+              onChange={(e) => handleLabCodeChange(index, e.target.value)}
               onKeyDown={handleKeyDown}
               className="pbl-form-input"
-              data-group="lab"
+              data-group="lab-code"
             />
-            {index === labs.length - 1 && (
-              <Plus className="ml-2 cursor-pointer" onClick={addLabField} />
-            )}
+            <Input
+              placeholder="Lab Name"
+              value={lab.name}
+              onChange={(e) => handleLabNameChange(index, e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="pbl-form-input"
+              data-group="lab-name"
+            />
+            <div className="flex items-center">
+              {index == 0 && (
+                <Plus className="ml-2 cursor-pointer" onClick={addLabField} />
+              )}
+              {index !== 0 && (
+                <X
+                  className="ml-2 cursor-pointer text-red-500 hover:text-red-700"
+                  onClick={() => removeLabField(index)}
+                />
+              )}
+            </div>
           </div>
         ))}
         <Input
