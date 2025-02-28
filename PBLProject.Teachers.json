@@ -1,252 +1,200 @@
-[{
-  "_id": {
-    "$oid": "67beffb787195f8f8075f8f4"
+[
+  {
+    "_id": { "$oid": "67beffb787195f8f8075f8f4" },
+    "name": "Dr Test",
+    "employeeCode": "ES23423",
+    "subjects": [{ "code": "CS202", "name": "Object-Oriented Programming" }],
+    "labs": [{ "code": "CSL202", "name": "OOP Lab" }],
+    "workingHours": 12
   },
-  "name": "Dr Test",
-  "employeeCode": "ES23423",
-  "subjects": [
-    "CS202a1"
-  ],
-  "labs": "CS202A1",
-  "workingHours": 12
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021801e"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021801e" },
+    "name": "Dr. Aarav Sharma",
+    "employeeCode": "ES1001",
+    "subjects": [
+      { "code": "CS201", "name": "Data Structures and Algorithms" },
+      { "code": "CS301", "name": "Database Management Systems" }
+    ],
+    "labs": [{ "code": "CSL201", "name": "Data Structures Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Aarav Sharma",
-  "employeeCode": "ES1001",
-  "subjects": [
-    "CS201",
-    "CS301"
-  ],
-  "labs": [
-    "CSL201"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021801f"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021801f" },
+    "name": "Dr. Priya Patel",
+    "employeeCode": "ES1002",
+    "subjects": [
+      { "code": "CS202", "name": "Object-Oriented Programming" },
+      { "code": "CS302", "name": "Operating Systems" }
+    ],
+    "labs": [{ "code": "CSL202", "name": "OOP Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Priya Patel",
-  "employeeCode": "ES1002",
-  "subjects": [
-    "CS202",
-    "CS302"
-  ],
-  "labs": [
-    "CSL202"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218020"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218020" },
+    "name": "Dr. Vikram Singh",
+    "employeeCode": "ES1003",
+    "subjects": [
+      { "code": "CS203", "name": "Computer Organization" },
+      { "code": "CS303", "name": "Computer Networks" }
+    ],
+    "labs": [{ "code": "CSL301", "name": "DBMS Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Vikram Singh",
-  "employeeCode": "ES1003",
-  "subjects": [
-    "CS203",
-    "CS303"
-  ],
-  "labs": [
-    "CSL301"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218021"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218021" },
+    "name": "Dr. Neha Gupta",
+    "employeeCode": "ES1004",
+    "subjects": [
+      { "code": "CS204", "name": "Discrete Mathematics" },
+      { "code": "CS304", "name": "Software Engineering" }
+    ],
+    "labs": [{ "code": "CSL302", "name": "OS Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Neha Gupta",
-  "employeeCode": "ES1004",
-  "subjects": [
-    "CS204",
-    "CS304"
-  ],
-  "labs": [
-    "CSL302"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218022"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218022" },
+    "name": "Dr. Rajesh Kumar",
+    "employeeCode": "ES1005",
+    "subjects": [
+      { "code": "CS401", "name": "Artificial Intelligence" },
+      { "code": "CS201", "name": "Data Structures and Algorithms" }
+    ],
+    "labs": [{ "code": "CSL401", "name": "AI Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Rajesh Kumar",
-  "employeeCode": "ES1005",
-  "subjects": [
-    "CS401",
-    "CS201"
-  ],
-  "labs": [
-    "CSL401"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218023"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218023" },
+    "name": "Dr. Ananya Reddy",
+    "employeeCode": "ES1006",
+    "subjects": [
+      { "code": "CS402", "name": "Web Technologies" },
+      { "code": "CS202", "name": "Object-Oriented Programming" }
+    ],
+    "labs": [{ "code": "CSL402", "name": "Web Tech Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Ananya Reddy",
-  "employeeCode": "ES1006",
-  "subjects": [
-    "CS402",
-    "CS202"
-  ],
-  "labs": [
-    "CSL402"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218024"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218024" },
+    "name": "Dr. Arjun Malhotra",
+    "employeeCode": "ES1007",
+    "subjects": [
+      { "code": "CS403", "name": "Cryptography and Network Security" },
+      { "code": "CS303", "name": "Computer Networks" }
+    ],
+    "labs": [{ "code": "CSL201", "name": "Data Structures Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Arjun Malhotra",
-  "employeeCode": "ES1007",
-  "subjects": [
-    "CS403",
-    "CS303"
-  ],
-  "labs": [
-    "CSL201"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218025"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218025" },
+    "name": "Dr. Meera Desai",
+    "employeeCode": "ES1008",
+    "subjects": [
+      { "code": "CS404", "name": "Cloud Computing" },
+      { "code": "CS304", "name": "Software Engineering" }
+    ],
+    "labs": [{ "code": "CSL202", "name": "OOP Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Meera Desai",
-  "employeeCode": "ES1008",
-  "subjects": [
-    "CS404",
-    "CS304"
-  ],
-  "labs": [
-    "CSL202"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218026"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218026" },
+    "name": "Dr. Karthik Iyer",
+    "employeeCode": "ES1009",
+    "subjects": [
+      { "code": "CS201", "name": "Data Structures and Algorithms" },
+      { "code": "CS401", "name": "Artificial Intelligence" }
+    ],
+    "labs": [{ "code": "CSL301", "name": "DBMS Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Karthik Iyer",
-  "employeeCode": "ES1009",
-  "subjects": [
-    "CS201",
-    "CS401"
-  ],
-  "labs": [
-    "CSL301"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218027"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218027" },
+    "name": "Dr. Sarika Verma",
+    "employeeCode": "ES1010",
+    "subjects": [
+      { "code": "CS202", "name": "Object-Oriented Programming" },
+      { "code": "CS402", "name": "Web Technologies" }
+    ],
+    "labs": [{ "code": "CSL302", "name": "OS Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Sarika Verma",
-  "employeeCode": "ES1010",
-  "subjects": [
-    "CS202",
-    "CS402"
-  ],
-  "labs": [
-    "CSL302"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218028"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218028" },
+    "name": "Dr. Rahul Choudhury",
+    "employeeCode": "ES1011",
+    "subjects": [
+      { "code": "CS203", "name": "Computer Organization" },
+      { "code": "CS403", "name": "Cryptography and Network Security" }
+    ],
+    "labs": [{ "code": "CSL401", "name": "AI Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Rahul Choudhury",
-  "employeeCode": "ES1011",
-  "subjects": [
-    "CS203",
-    "CS403"
-  ],
-  "labs": [
-    "CSL401"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff0218029"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff0218029" },
+    "name": "Dr. Pooja Khanna",
+    "employeeCode": "ES1012",
+    "subjects": [
+      { "code": "CS204", "name": "Discrete Mathematics" },
+      { "code": "CS404", "name": "Cloud Computing" }
+    ],
+    "labs": [{ "code": "CSL402", "name": "Web Tech Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Pooja Khanna",
-  "employeeCode": "ES1012",
-  "subjects": [
-    "CS204",
-    "CS404"
-  ],
-  "labs": [
-    "CSL402"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021802a"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021802a" },
+    "name": "Dr. Amit Saxena",
+    "employeeCode": "ES1013",
+    "subjects": [
+      { "code": "CS301", "name": "Database Management Systems" },
+      { "code": "CS201", "name": "Data Structures and Algorithms" }
+    ],
+    "labs": [{ "code": "CSL201", "name": "Data Structures Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Amit Saxena",
-  "employeeCode": "ES1013",
-  "subjects": [
-    "CS301",
-    "CS201"
-  ],
-  "labs": [
-    "CSL201"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021802b"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021802b" },
+    "name": "Dr. Divya Menon",
+    "employeeCode": "ES1014",
+    "subjects": [
+      { "code": "CS302", "name": "Operating Systems" },
+      { "code": "CS202", "name": "Object-Oriented Programming" }
+    ],
+    "labs": [{ "code": "CSL202", "name": "OOP Lab" }],
+    "workingHours": 22
   },
-  "name": "Dr. Divya Menon",
-  "employeeCode": "ES1014",
-  "subjects": [
-    "CS302",
-    "CS202"
-  ],
-  "labs": [
-    "CSL202"
-  ],
-  "workingHours": 22
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021802c"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021802c" },
+    "name": "Dr. Suresh Nair",
+    "employeeCode": "ES1015",
+    "subjects": [
+      { "code": "CS303", "name": "Computer Networks" },
+      { "code": "CS203", "name": "Computer Organization" }
+    ],
+    "labs": [{ "code": "CSL301", "name": "DBMS Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Suresh Nair",
-  "employeeCode": "ES1015",
-  "subjects": [
-    "CS303",
-    "CS203"
-  ],
-  "labs": [
-    "CSL301"
-  ],
-  "workingHours": 20
-},
-{
-  "_id": {
-    "$oid": "67bf05120d63cf2ff021802d"
+  {
+    "_id": { "$oid": "67bf05120d63cf2ff021802d" },
+    "name": "Dr. Kavita Rao",
+    "employeeCode": "ES1016",
+    "subjects": [
+      { "code": "CS304", "name": "Software Engineering" },
+      { "code": "CS204", "name": "Discrete Mathematics" }
+    ],
+    "labs": [{ "code": "CSL302", "name": "OS Lab" }],
+    "workingHours": 20
   },
-  "name": "Dr. Kavita Rao",
-  "employeeCode": "ES1016",
-  "subjects": [
-    "CS304",
-    "CS204"
-  ],
-  "labs": [
-    "CSL302"
-  ],
-  "workingHours": 20
-}]
+  {
+    "_id": { "$oid": "67c183e8a2532c9651a2a622" },
+    "name": "Professor Valid",
+    "employeeCode": "VC1201",
+    "subjects": [
+      { "code": "VS1291", "name": "Valid sub 1" },
+      { "code": "VS1292", "name": "Valid sub 2" }
+    ],
+    "labs": [
+      { "code": "VL1911", "name": "Valib lab 1" },
+      { "code": "VL1912", "name": "Valid lab 2" }
+    ],
+    "workingHours": 22
+  }
+]
