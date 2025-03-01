@@ -1,7 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Loader2, Plus, X } from "lucide-react";
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
 
 interface ProfessorInputProps {
   onSuccess?: () => void;
@@ -17,6 +28,24 @@ interface LabField {
   name: string;
 }
 
+interface Teacher {
+   name: string;
+  employeeCode: string;
+  subjects?: { code: string; name: string }[];
+  labs?: { code: string; name: string }[];
+  workingHours: number;
+}
+
+interface Year {
+   year: number;
+  sections: {
+    section: string;
+    room: string;
+    subjects: { code: string; name: string; credits: number }[];
+    labs: { code: string; name: string; credits: number; hours: number }[];
+  }[];
+}
+
 const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [name, setName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
@@ -26,10 +55,26 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [labs, setLabs] = useState<LabField[]>([{ code: "", name: "" }]);
   const [workingHours, setWorkingHours] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [professors, setProfessors] = useState<Teacher[]>([]);
+  const [years, setYears] = useState<Year[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [subjectFocusIndex, setSubjectFocusIndex] = useState(-1);
+  const [labFocusIndex, setLabFocusIndex] = useState(-1);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/fetchData");
+      const data = await res.json();
+      setProfessors(data.professors || []);
+      setYears(data.years || []);
+      setIsDataLoading(false);
+    };
+    fetchData();
+  }, []);
 
   // Updated helper functions for validation:
   const validateGeneralInput = (value: string) => {
-    return value.replace(/[^a-zA-Z0-9 ]/g, ""); // removes only invalid characters
+    return value.replace(/[^a-zA-Z0-9 \-]/g, ""); // removes only invalid characters, now allows hyphen (-)
   };
 
   const validateNumberInput = (value: string) => {
@@ -67,7 +112,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
 
   const handleSubjectCodeChange = (index: number, value: string) => {
     const newSubjects = [...subjects];
-    newSubjects[index].code = validateGeneralInput(value);
+    newSubjects[index].code = validateGeneralInput(value).toUpperCase();
     setSubjects(newSubjects);
   };
 
@@ -96,7 +141,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
 
   const handleLabCodeChange = (index: number, value: string) => {
     const newLabs = [...labs];
-    newLabs[index].code = validateGeneralInput(value);
+    newLabs[index].code = validateGeneralInput(value).toUpperCase();
     setLabs(newLabs);
   };
 
@@ -133,27 +178,24 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const handleSubmit = async () => {
     setIsSubmitting(true);
 
-    // Filter out empty subjects (both code and name must be empty)
+    // Filter out empty subjects and labs
     const filteredSubjects = subjects.filter(
       (subject) => subject.code.trim() !== "" && subject.name.trim() !== ""
     );
-
-    // Filter out empty labs (both code and name must be empty)
     const filteredLabs = labs.filter(
       (lab) => lab.code.trim() !== "" && lab.name.trim() !== ""
     );
 
+
     const payload = {
       name,
       employeeCode,
-      // Only include subjects if there are non-empty entries
       ...(filteredSubjects.length > 0 && {
         subjects: filteredSubjects.map((subject) => ({
           code: subject.code,
           name: subject.name,
         })),
       }),
-      // Only include labs if there are non-empty entries
       ...(filteredLabs.length > 0 && {
         labs: filteredLabs.map((lab) => ({
           code: lab.code,
@@ -169,54 +211,255 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
     });
     setIsSubmitting(false);
     resetForm();
+    setErrors([]);
     if (onSuccess) onSuccess();
+  };
+
+  // Flatten subjects and labs from 'years' state
+  const allSubjects = useMemo(() => {
+    const uniqueSubjects = new Set<string>();
+    const list: SubjectField[] = [];
+    years.forEach((y) => {
+      y.sections.forEach((section) => {
+        section.subjects.forEach((s) => {
+          const key = `${s.code}-${s.name}`;
+          if (!uniqueSubjects.has(key)) {
+            uniqueSubjects.add(key);
+            list.push({ code: s.code, name: s.name });
+          }
+        });
+      });
+    });
+    return list;
+  }, [years]);
+
+  const allLabs = useMemo(() => {
+    const uniqueLabs = new Set<string>();
+    const list: LabField[] = [];
+    years.forEach((y) => {
+      y.sections.forEach((section) => {
+        section.labs.forEach((l) => {
+          const key = `${l.code}-${l.name}`;
+          if (!uniqueLabs.has(key)) {
+            uniqueLabs.add(key);
+            list.push({ code: l.code, name: l.name });
+          }
+        });
+      });
+    });
+    return list;
+  }, [years]);
+
+  // Real-time validations
+  useEffect(() => {
+    const errorsList: string[] = [];
+    if (
+      employeeCode.trim() !== "" &&
+      professors.some(
+        (prof) =>
+          prof.employeeCode.trim().toLowerCase() ===
+          employeeCode.trim().toLowerCase()
+      )
+    ) {
+      errorsList.push("A professor with this employee code already exists");
+    }
+    const filteredSubjects = subjects.filter(
+      (subject) => subject.code.trim() !== "" && subject.name.trim() !== ""
+    );
+    if (
+      filteredSubjects.some(
+        (subject) =>
+          !allSubjects.some(
+            (s) => s.code === subject.code && s.name === subject.name
+          )
+      )
+    ) {
+      errorsList.push("Cannot assign a subject that doesnt exist");
+    }
+    const filteredLabs = labs.filter(
+      (lab) => lab.code.trim() !== "" && lab.name.trim() !== ""
+    );
+    if (
+      filteredLabs.some(
+        (lab) =>
+          !allLabs.some((l) => l.code === lab.code && l.name === lab.name)
+      )
+    ) {
+      errorsList.push("Cannot assign a lab that doesnt exist");
+    }
+    setErrors(errorsList);
+  }, [employeeCode, subjects, labs, professors, allSubjects, allLabs]);
+
+  // Modified helper functions for filtering suggestions
+  const getFilteredSubjects = (subject: SubjectField, index: number) => {
+    const inputCode = subject.code.trim().toLowerCase();
+    const inputName = subject.name.trim().toLowerCase();
+
+    // Build a set of already selected subject keys (excluding current field)
+    const selectedSubjectKeys = new Set<string>();
+    subjects.forEach((s, idx) => {
+      if (idx !== index && s.code.trim() && s.name.trim()) {
+        selectedSubjectKeys.add(
+          s.code.trim().toLowerCase() + "-" + s.name.trim().toLowerCase()
+        );
+      }
+    });
+
+    if (inputCode && inputName) {
+      const perfectMatch = allSubjects.filter(
+        (item) =>
+          item.code.toLowerCase() === inputCode &&
+          item.name.toLowerCase() === inputName
+      );
+      if (perfectMatch.length) {
+        return perfectMatch.filter(
+          (item) =>
+            !selectedSubjectKeys.has(
+              item.code.toLowerCase() + "-" + item.name.toLowerCase()
+            )
+        );
+      }
+    }
+    return allSubjects.filter((item) => {
+      const matchCode = inputCode
+        ? item.code.toLowerCase().includes(inputCode)
+        : true;
+      const matchName = inputName
+        ? item.name.toLowerCase().includes(inputName)
+        : true;
+      return (
+        matchCode &&
+        matchName &&
+        !selectedSubjectKeys.has(
+          item.code.toLowerCase() + "-" + item.name.toLowerCase()
+        )
+      );
+    });
+  };
+
+  const getFilteredLabs = (lab: LabField, index: number) => {
+    const inputCode = lab.code.trim().toLowerCase();
+    const inputName = lab.name.trim().toLowerCase();
+
+    // Build a set of already selected lab keys (excluding current field)
+    const selectedLabKeys = new Set<string>();
+    labs.forEach((l, idx) => {
+      if (idx !== index && l.code.trim() && l.name.trim()) {
+        selectedLabKeys.add(
+          l.code.trim().toLowerCase() + "-" + l.name.trim().toLowerCase()
+        );
+      }
+    });
+
+    if (inputCode && inputName) {
+      const perfectMatch = allLabs.filter(
+        (item) =>
+          item.code.toLowerCase() === inputCode &&
+          item.name.toLowerCase() === inputName
+      );
+      if (perfectMatch.length) {
+        return perfectMatch.filter(
+          (item) =>
+            !selectedLabKeys.has(
+              item.code.toLowerCase() + "-" + item.name.toLowerCase()
+            )
+        );
+      }
+    }
+    return allLabs.filter((item) => {
+      const matchCode = inputCode
+        ? item.code.toLowerCase().includes(inputCode)
+        : true;
+      const matchName = inputName
+        ? item.name.toLowerCase().includes(inputName)
+        : true;
+      return (
+        matchCode &&
+        matchName &&
+        !selectedLabKeys.has(
+          item.code.toLowerCase() + "-" + item.name.toLowerCase()
+        )
+      );
+    });
   };
 
   return (
     <div>
-      <div className="max-w-sm space-y-2">
+      <div className=" space-y-2">
         <Input
           placeholder="Professor Name"
           value={name}
-          onChange={(e) => setName(validateGeneralInput(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(validateGeneralInput(e.target.value))
+          }
           onKeyDown={handleKeyDown}
-          className="pbl-form-input"
+          className="pbl-form-input max-w-sm"
         />
         <Input
           placeholder="Employee Code"
           value={employeeCode}
-          onChange={(e) =>
-            setEmployeeCode(validateGeneralInput(e.target.value))
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmployeeCode(validateGeneralInput(e.target.value).toUpperCase())
           }
           onKeyDown={handleKeyDown}
-          className="pbl-form-input"
+          className="pbl-form-input max-w-sm"
         />
         {subjects.map((subject, index) => (
           <div key={index} className="flex items-center gap-2">
-            <Input
+        <Command className="subject-command rounded-lg border">
+          <div className="flex items-center ">
+            <CommandInput
               placeholder="Subject Code"
               value={subject.code}
-              onChange={(e) => handleSubjectCodeChange(index, e.target.value)}
+              onValueChange={(value) =>
+                handleSubjectCodeChange(index, value)
+              }
               onKeyDown={handleKeyDown}
-              className="pbl-form-input"
+              onFocus={() => setSubjectFocusIndex(index)}
+              className="pbl-form-input "
               data-group="subject-code"
             />
-            <Input
+            <CommandInput
               placeholder="Subject Name"
               value={subject.name}
-              onChange={(e) => handleSubjectNameChange(index, e.target.value)}
+              onValueChange={(value) =>
+                handleSubjectNameChange(index, value)
+              }
               onKeyDown={handleKeyDown}
-              className="pbl-form-input"
+              onFocus={() => setSubjectFocusIndex(index)}
+              className="pbl-form-input "
               data-group="subject-name"
             />
+          </div>
+          {(subjectFocusIndex === index ||
+            subject.code ||
+            subject.name) && (
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup>
+                {getFilteredSubjects(subject, index).map((item) => (
+                  <CommandItem
+                    key={item.code}
+                    value={`${item.name} ${item.code}`}
+                    onSelect={() => {
+                      handleSubjectCodeChange(index, item.code);
+                      handleSubjectNameChange(index, item.name);
+                    }}
+                  >
+                    {item.name} ({item.code})
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          )}
+        </Command>
             <div className="flex items-center">
-              {index == 0 && (
+              {index === 0 ? (
                 <Plus
                   className="ml-2 cursor-pointer"
                   onClick={addSubjectField}
                 />
-              )}
-              {index !== 0 && (
+              ) : (
                 <X
                   className="ml-2 cursor-pointer text-red-500 hover:text-red-700"
                   onClick={() => removeSubjectField(index)}
@@ -227,27 +470,51 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         ))}
         {labs.map((lab, index) => (
           <div key={index} className="flex items-center gap-2">
-            <Input
+        <Command className="lab-command rounded-lg border">
+          <div className="flex items-center ">
+            <CommandInput
               placeholder="Lab Code"
               value={lab.code}
-              onChange={(e) => handleLabCodeChange(index, e.target.value)}
+              onValueChange={(value) => handleLabCodeChange(index, value)}
               onKeyDown={handleKeyDown}
+              onFocus={() => setLabFocusIndex(index)}
               className="pbl-form-input"
               data-group="lab-code"
             />
-            <Input
+            <CommandInput
               placeholder="Lab Name"
               value={lab.name}
-              onChange={(e) => handleLabNameChange(index, e.target.value)}
+              onValueChange={(value) => handleLabNameChange(index, value)}
               onKeyDown={handleKeyDown}
-              className="pbl-form-input"
+              onFocus={() => setLabFocusIndex(index)}
+              className="pbl-form-input "
               data-group="lab-name"
             />
+          </div>
+          {(labFocusIndex === index || lab.code || lab.name) && (
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup>
+                {getFilteredLabs(lab, index).map((item) => (
+                  <CommandItem
+                    key={item.code}
+                    value={`${item.name} ${item.code}`}
+                    onSelect={() => {
+                      handleLabCodeChange(index, item.code);
+                      handleLabNameChange(index, item.name);
+                    }}
+                  >
+                    {item.name} ({item.code})
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          )}
+        </Command>
             <div className="flex items-center">
-              {index == 0 && (
+              {index === 0 ? (
                 <Plus className="ml-2 cursor-pointer" onClick={addLabField} />
-              )}
-              {index !== 0 && (
+              ) : (
                 <X
                   className="ml-2 cursor-pointer text-red-500 hover:text-red-700"
                   onClick={() => removeLabField(index)}
@@ -259,14 +526,21 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         <Input
           placeholder="Working Hours"
           value={workingHours}
-          onChange={(e) => setWorkingHours(validateNumberInput(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setWorkingHours(validateNumberInput(e.target.value))
+          }
           onKeyDown={handleKeyDown}
-          className="pbl-form-input"
+          className="pbl-form-input max-w-sm"
         />
+        {errors.map((err, idx) => (
+          <p key={idx} className="mb-2 text-red-600 text-sm">
+            {err}
+          </p>
+        ))}
         <Button
           onClick={handleSubmit}
-          disabled={!isFormValid || isSubmitting}
-          variant={isFormValid ? undefined : "secondary"}
+          disabled={errors.length > 0 || !isFormValid || isSubmitting}
+          variant={errors.length > 0 || !isFormValid ? "secondary" : undefined}
         >
           {isSubmitting ? <Loader2 className="animate-spin" /> : "Submit"}
         </Button>
