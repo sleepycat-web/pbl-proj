@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Loader2, Plus, X } from "lucide-react";
@@ -17,6 +17,24 @@ interface LabField {
   name: string;
 }
 
+interface Teacher {
+   name: string;
+  employeeCode: string;
+  subjects?: { code: string; name: string }[];
+  labs?: { code: string; name: string }[];
+  workingHours: number;
+}
+
+interface Year {
+   year: number;
+  sections: {
+    section: string;
+    room: string;
+    subjects: { code: string; name: string; credits: number }[];
+    labs: { code: string; name: string; credits: number; hours: number }[];
+  }[];
+}
+
 const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [name, setName] = useState("");
   const [employeeCode, setEmployeeCode] = useState("");
@@ -26,6 +44,18 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [labs, setLabs] = useState<LabField[]>([{ code: "", name: "" }]);
   const [workingHours, setWorkingHours] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [professors, setProfessors] = useState<Teacher[]>([]);
+  const [years, setYears] = useState<Year[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("/api/fetchData");
+      const data = await res.json();
+      setProfessors(data.professors || []);
+      setYears(data.years || []);
+    };
+    fetchData();
+  }, []);
 
   // Updated helper functions for validation:
   const validateGeneralInput = (value: string) => {
