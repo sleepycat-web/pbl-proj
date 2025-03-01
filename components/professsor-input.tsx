@@ -186,44 +186,6 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
       (lab) => lab.code.trim() !== "" && lab.name.trim() !== ""
     );
 
-    const errorsLocal: string[] = [];
-
-    // Check for duplicate employee code
-    if (
-      professors.some(
-        (prof) =>
-          prof.employeeCode.trim().toLowerCase() ===
-          employeeCode.trim().toLowerCase()
-      )
-    ) {
-      errorsLocal.push("A professor with this employee code already exists");
-    }
-    // Validate subjects exist (add error only once)
-    if (
-      filteredSubjects.some(
-        (subject) =>
-          !allSubjects.some(
-            (s) => s.code === subject.code && s.name === subject.name
-          )
-      )
-    ) {
-      errorsLocal.push("Cannot assign a subject that doesnt exist");
-    }
-    // Validate labs exist (add error only once)
-    if (
-      filteredLabs.some(
-        (lab) =>
-          !allLabs.some((l) => l.code === lab.code && l.name === lab.name)
-      )
-    ) {
-      errorsLocal.push("Cannot assign a lab that doesnt exist");
-    }
-
-    if (errorsLocal.length > 0) {
-      setErrors(errorsLocal);
-      setIsSubmitting(false);
-      return;
-    }
 
     const payload = {
       name,
