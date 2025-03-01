@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { Loader2, Plus, X } from "lucide-react";
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
 
 interface ProfessorInputProps {
   onSuccess?: () => void;
@@ -46,7 +57,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [professors, setProfessors] = useState<Teacher[]>([]);
   const [years, setYears] = useState<Year[]>([]);
-
+  const [error, setError] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/api/fetchData");
@@ -208,14 +219,16 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         <Input
           placeholder="Professor Name"
           value={name}
-          onChange={(e) => setName(validateGeneralInput(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(validateGeneralInput(e.target.value))
+          }
           onKeyDown={handleKeyDown}
           className="pbl-form-input"
         />
         <Input
           placeholder="Employee Code"
           value={employeeCode}
-          onChange={(e) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEmployeeCode(validateGeneralInput(e.target.value))
           }
           onKeyDown={handleKeyDown}
@@ -223,22 +236,33 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         />
         {subjects.map((subject, index) => (
           <div key={index} className="flex items-center gap-2">
-            <Input
+        <Command className="rounded-lg border shadow-md md:min-w-[450px]">
+          <div className="flex items-center ">
+            <CommandInput
               placeholder="Subject Code"
               value={subject.code}
-              onChange={(e) => handleSubjectCodeChange(index, e.target.value)}
+              onValueChange={(value) =>
+                handleSubjectCodeChange(index, value)
+              }
               onKeyDown={handleKeyDown}
-              className="pbl-form-input"
+              className="pbl-form-input "
               data-group="subject-code"
             />
-            <Input
+            <CommandInput
               placeholder="Subject Name"
               value={subject.name}
-              onChange={(e) => handleSubjectNameChange(index, e.target.value)}
+              onValueChange={(value) =>
+                handleSubjectNameChange(index, value)
+              }
               onKeyDown={handleKeyDown}
               className="pbl-form-input"
               data-group="subject-name"
             />
+          </div>
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+          </CommandList>
+        </Command>
             <div className="flex items-center">
               {index == 0 && (
                 <Plus
@@ -257,22 +281,29 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         ))}
         {labs.map((lab, index) => (
           <div key={index} className="flex items-center gap-2">
-            <Input
+        <Command className="rounded-lg border shadow-md md:min-w-[450px]">
+          <div className="flex items-center ">
+            <CommandInput
               placeholder="Lab Code"
               value={lab.code}
-              onChange={(e) => handleLabCodeChange(index, e.target.value)}
+              onValueChange={(value) => handleLabCodeChange(index, value)}
               onKeyDown={handleKeyDown}
               className="pbl-form-input"
               data-group="lab-code"
             />
-            <Input
+            <CommandInput
               placeholder="Lab Name"
               value={lab.name}
-              onChange={(e) => handleLabNameChange(index, e.target.value)}
+              onValueChange={(value) => handleLabNameChange(index, value)}
               onKeyDown={handleKeyDown}
-              className="pbl-form-input"
+              className="pbl-form-input "
               data-group="lab-name"
             />
+          </div>
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+          </CommandList>
+        </Command>
             <div className="flex items-center">
               {index == 0 && (
                 <Plus className="ml-2 cursor-pointer" onClick={addLabField} />
@@ -289,10 +320,13 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
         <Input
           placeholder="Working Hours"
           value={workingHours}
-          onChange={(e) => setWorkingHours(validateNumberInput(e.target.value))}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setWorkingHours(validateNumberInput(e.target.value))
+          }
           onKeyDown={handleKeyDown}
           className="pbl-form-input"
         />
+        {error && <p className="text-red-600 text-sm">{error}</p>}
         <Button
           onClick={handleSubmit}
           disabled={!isFormValid || isSubmitting}
