@@ -4,15 +4,12 @@ import { Button } from "./ui/button";
 import { Loader2, Plus, X } from "lucide-react";
 import {
   Command,
-  CommandDialog,
-  CommandEmpty,
+   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command";
+ } from "@/components/ui/command";
 
 interface ProfessorInputProps {
   onSuccess?: () => void;
@@ -58,8 +55,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
   const [professors, setProfessors] = useState<Teacher[]>([]);
   const [years, setYears] = useState<Year[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
-  const [isDataLoading, setIsDataLoading] = useState(true);
-  const [subjectFocusIndex, setSubjectFocusIndex] = useState(-1);
+   const [subjectFocusIndex, setSubjectFocusIndex] = useState(-1);
   const [labFocusIndex, setLabFocusIndex] = useState(-1);
   useEffect(() => {
     const fetchData = async () => {
@@ -67,8 +63,7 @@ const ProfessorInput = ({ onSuccess }: ProfessorInputProps) => {
       const data = await res.json();
       setProfessors(data.professors || []);
       setYears(data.years || []);
-      setIsDataLoading(false);
-    };
+     };
     fetchData();
   }, []);
 
